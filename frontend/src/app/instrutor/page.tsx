@@ -1,0 +1,253 @@
+import { AppLayout } from '@/components/app-layout'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { GraduationCap, Plus, Search, Filter, Clock, Users, Calendar, CheckCircle } from 'lucide-react'
+
+export default function InstrutorPage() {
+  return (
+    <AppLayout>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Instrutor</h1>
+            <p className="text-muted-foreground">Gestão de instrutores, aulas e horários</p>
+          </div>
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            <Plus className="w-4 h-4 mr-2" />
+            Novo Instrutor
+          </Button>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Instrutores Ativos</CardTitle>
+              <GraduationCap className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-primary">12</div>
+              <p className="text-xs text-muted-foreground">
+                +2 novos este mês
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Aulas Hoje</CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-primary">28</div>
+              <p className="text-xs text-muted-foreground">
+                6 aulas restantes
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Horas Trabalhadas</CardTitle>
+              <Clock className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-primary">156h</div>
+              <p className="text-xs text-muted-foreground">
+                Este mês
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Taxa de Aprovação</CardTitle>
+              <CheckCircle className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-primary">87%</div>
+              <p className="text-xs text-muted-foreground">
+                +5% em relação ao mês anterior
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Filters and Search */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Filtros e Busca</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex-1">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
+                    type="text"
+                    placeholder="Buscar por nome, CPF ou especialidade..."
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+              <Button variant="outline">
+                <Filter className="w-4 h-4 mr-2" />
+                Filtros
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Agenda do Dia */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Agenda do Dia</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
+                  <div>
+                    <h4 className="font-medium text-foreground">08:00 - 09:00</h4>
+                    <p className="text-sm text-muted-foreground">João Silva - Aula Prática</p>
+                  </div>
+                  <div className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded">
+                    Em andamento
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
+                  <div>
+                    <h4 className="font-medium text-foreground">09:00 - 10:00</h4>
+                    <p className="text-sm text-muted-foreground">Maria Santos - Aula Teórica</p>
+                  </div>
+                  <div className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
+                    Próxima
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
+                  <div>
+                    <h4 className="font-medium text-foreground">10:00 - 11:00</h4>
+                    <p className="text-sm text-muted-foreground">Carlos Oliveira - Simulado</p>
+                  </div>
+                  <div className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
+                    Agendado
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
+                  <div>
+                    <h4 className="font-medium text-foreground">11:00 - 12:00</h4>
+                    <p className="text-sm text-muted-foreground">Ana Costa - Aula Prática</p>
+                  </div>
+                  <div className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
+                    Agendado
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Performance dos Instrutores */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Performance dos Instrutores</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                      <GraduationCap className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-foreground">Prof. Roberto</h4>
+                      <p className="text-sm text-muted-foreground">95% aprovação</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-primary">45 alunos</p>
+                    <p className="text-xs text-muted-foreground">Este mês</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                      <GraduationCap className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-foreground">Prof. Mariana</h4>
+                      <p className="text-sm text-muted-foreground">92% aprovação</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-primary">38 alunos</p>
+                    <p className="text-xs text-muted-foreground">Este mês</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                      <GraduationCap className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-foreground">Prof. Carlos</h4>
+                      <p className="text-sm text-muted-foreground">88% aprovação</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-primary">32 alunos</p>
+                    <p className="text-xs text-muted-foreground">Este mês</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                      <GraduationCap className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-foreground">Prof. Ana</h4>
+                      <p className="text-sm text-muted-foreground">90% aprovação</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-primary">29 alunos</p>
+                    <p className="text-xs text-muted-foreground">Este mês</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Instrutores Table Placeholder */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg font-semibold">Lista de Instrutores</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center py-12">
+              <GraduationCap className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-foreground mb-2">
+                Tabela de Instrutores
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Aqui será exibida a tabela com todos os instrutores cadastrados.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Funcionalidades futuras: gestão de horários, avaliações, histórico de aulas, etc.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </AppLayout>
+  )
+}

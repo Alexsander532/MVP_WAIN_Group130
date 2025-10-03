@@ -10,7 +10,7 @@ export default function FinanceiroPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Financeiro</h1>
+            <h1 className="text-3xl font-bold text-foreground">Financeiro</h1>
             <p className="text-gray-600">Controle completo das finanças da autoescola</p>
           </div>
           <div className="flex gap-2">
@@ -202,14 +202,14 @@ export default function FinanceiroPage() {
             </CardHeader>
             <CardContent>
               <div className="text-center py-12">
-                <TrendingUp className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                <TrendingUp className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-foreground mb-2">
                   Gráfico de Fluxo de Caixa
                 </h3>
-                <p className="text-gray-500 mb-4">
+                <p className="text-muted-foreground mb-4">
                   Aqui será exibido o gráfico de entradas e saídas mensais.
                 </p>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   Funcionalidades futuras: gráficos interativos, comparações anuais, etc.
                 </p>
               </div>

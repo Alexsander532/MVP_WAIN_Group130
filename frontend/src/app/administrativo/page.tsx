@@ -10,7 +10,7 @@ export default function AdministrativoPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Administrativo</h1>
+            <h1 className="text-3xl font-bold text-foreground">Administrativo</h1>
             <p className="text-gray-600">Gestão de funcionários, aulas e configurações gerais</p>
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700">
@@ -216,14 +216,14 @@ export default function AdministrativoPage() {
             </CardHeader>
             <CardContent>
               <div className="text-center py-8">
-                <Settings className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                <Settings className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-foreground mb-2">
                   Área de Relatórios
                 </h3>
-                <p className="text-gray-500 mb-4">
+                <p className="text-muted-foreground mb-4">
                   Aqui serão exibidos relatórios administrativos e análises.
                 </p>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   Funcionalidades futuras: relatórios de desempenho, estatísticas de aprovação, etc.
                 </p>
               </div>
