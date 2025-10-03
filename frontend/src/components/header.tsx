@@ -6,7 +6,6 @@ import { getGreetingWithName } from '@/lib/greeting'
 import { Bell, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import Image from 'next/image'
 
 export function Header() {
   const [greeting, setGreeting] = useState('')

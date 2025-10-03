@@ -2,15 +2,12 @@
 
 import { Sidebar } from '@/components/sidebar'
 import { Header } from '@/components/header'
-import { useAppStore } from '@/lib/store'
-import { cn } from '@/lib/utils'
 
 interface AppLayoutProps {
   children: React.ReactNode
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
-  const { sidebarExpanded } = useAppStore()
 
   return (
     <div className="flex h-screen bg-gray-50">
