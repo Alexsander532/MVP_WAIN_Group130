@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
@@ -13,7 +13,6 @@ import {
   Car,
   Settings,
   DollarSign,
-  Menu,
   ChevronLeft,
   Home
 } from 'lucide-react'
@@ -49,15 +48,12 @@ const navigationItems = [
 export function Sidebar() {
   const pathname = usePathname()
   const { sidebarExpanded, toggleSidebar, setSidebarExpanded, currentUser } = useAppStore()
-  const [isHovered, setIsHovered] = useState(false)
 
   const handleMouseEnter = () => {
-    setIsHovered(true)
     setSidebarExpanded(true)
   }
 
   const handleMouseLeave = () => {
-    setIsHovered(false)
     setSidebarExpanded(false)
   }
 
