@@ -1,9 +1,47 @@
+"use client"
+
+import { useState, lazy, Suspense } from 'react'
 import { AppLayout } from '@/components/app-layout'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Users, Plus, Search, Filter } from 'lucide-react'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
+import { Loading } from '@/components/ui/loading'
+import { Users, Plus, Search, Filter, FileText, Printer, ClipboardList, Activity } from 'lucide-react'
+import { StudentFormData } from '@/components/forms/student-form'
+
+// Lazy loading do StudentForm para melhor performance
+const StudentForm = lazy(() => import('@/components/forms/student-form').then(module => ({ default: module.StudentForm })))
+
+// Importação do tipo
+// (remove this line – the duplicate type import is deleted)
 
 export default function AlunoPage() {
+  const [activeTab, setActiveTab] = useState("cadastro")
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleNewStudent = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleStudentSubmit = (data: StudentFormData) => {
+    console.log('Dados do aluno:', data)
+    // Aqui você implementaria a lógica para salvar o aluno
+    setIsModalOpen(false)
+    // Mostrar mensagem de sucesso
+  }
+
+  const handleStudentSubmitInline = (data: StudentFormData) => {
+    console.log('Dados do aluno (inline):', data)
+    // Aqui você implementaria a lógica para salvar o aluno
+    // Mostrar mensagem de sucesso
+  }
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value)
+    // Removido: não abre mais o modal quando clica na aba cadastro
+  }
+
   return (
     <AppLayout>
       <div className="space-y-6">
@@ -13,9 +51,12 @@ export default function AlunoPage() {
             <h1 className="text-3xl font-bold text-gray-900">Gestão de Alunos</h1>
             <p className="text-gray-600">Gerencie todos os alunos da autoescola</p>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700">
+          <Button 
+            className="bg-blue-600 hover:bg-blue-700"
+            onClick={handleNewStudent}
+          >
             <Plus className="w-4 h-4 mr-2" />
-            Novo Aluno
+            Novo Cadastro
           </Button>
         </div>
 
@@ -42,8 +83,8 @@ export default function AlunoPage() {
               <Users className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">195</div>
-              <p className="text-xs text-gray-500">78.6% do total</p>
+              <div className="text-2xl font-bold">198</div>
+              <p className="text-xs text-gray-500">80% do total</p>
             </CardContent>
           </Card>
 
@@ -55,8 +96,8 @@ export default function AlunoPage() {
               <Users className="h-4 w-4 text-yellow-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">42</div>
-              <p className="text-xs text-gray-500">16.9% do total</p>
+              <div className="text-2xl font-bold">35</div>
+              <p className="text-xs text-gray-500">14% do total</p>
             </CardContent>
           </Card>
 
@@ -65,14 +106,123 @@ export default function AlunoPage() {
               <CardTitle className="text-sm font-medium text-gray-600">
                 Formados
               </CardTitle>
-              <Users className="h-4 w-4 text-blue-600" />
+              <Users className="h-4 w-4 text-purple-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">11</div>
-              <p className="text-xs text-gray-500">4.4% do total</p>
+              <div className="text-2xl font-bold">15</div>
+              <p className="text-xs text-gray-500">6% do total</p>
             </CardContent>
           </Card>
         </div>
+
+        {/* Sub-abas */}
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="cadastro" className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              Cadastro
+            </TabsTrigger>
+            <TabsTrigger value="historico" className="flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              Histórico
+            </TabsTrigger>
+            <TabsTrigger value="dae" className="flex items-center gap-2">
+              <Printer className="w-4 h-4" />
+              Impressão de DAE
+            </TabsTrigger>
+            <TabsTrigger value="ticket" className="flex items-center gap-2">
+              <ClipboardList className="w-4 h-4" />
+              Impressão de Ticket
+            </TabsTrigger>
+            <TabsTrigger value="exames" className="flex items-center gap-2">
+              <Activity className="w-4 h-4" />
+              Acompanhamento de Exames
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="cadastro" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Cadastro de Alunos</CardTitle>
+                <CardDescription>
+                  Preencha os dados abaixo para cadastrar um novo aluno
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Suspense fallback={<Loading />}>
+                  <StudentForm 
+                    onSubmit={handleStudentSubmitInline}
+                    onCancel={() => setActiveTab("historico")}
+                  />
+                </Suspense>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="historico" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Histórico de Alunos</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-8">
+                  <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-500 mb-4">
+                    Aqui será exibido o histórico completo dos alunos, incluindo aulas realizadas, progresso e avaliações.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="dae" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Impressão de DAE</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-8">
+                  <Printer className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-500 mb-4">
+                    Funcionalidade para gerar e imprimir Documentos de Arrecadação Estadual (DAE) para os alunos.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="ticket" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Impressão de Ticket</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-8">
+                  <ClipboardList className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-500 mb-4">
+                    Gere e imprima tickets e comprovantes para os alunos, incluindo recibos de pagamento e agendamentos.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="exames" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Acompanhamento de Exames</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-8">
+                  <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-500 mb-4">
+                    Acompanhe o status dos exames teóricos e práticos dos alunos, incluindo agendamentos e resultados.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
 
         {/* Filters and Search */}
         <Card>
@@ -99,26 +249,23 @@ export default function AlunoPage() {
           </CardContent>
         </Card>
 
-        {/* Table Placeholder */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Lista de Alunos</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center py-12">
-              <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
-                Tabela de Alunos
-              </h3>
-              <p className="text-gray-500 mb-4">
-                Aqui será exibida a tabela com todos os alunos cadastrados.
-              </p>
-              <p className="text-sm text-gray-400">
-                Funcionalidades futuras: listagem, edição, histórico de aulas, progresso, etc.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Modal de Cadastro */}
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Cadastro de Novo Aluno</DialogTitle>
+              <DialogDescription>
+                Preencha os dados abaixo para cadastrar um novo aluno na autoescola.
+              </DialogDescription>
+            </DialogHeader>
+            <Suspense fallback={<Loading />}>
+              <StudentForm 
+                onSubmit={handleStudentSubmit}
+                onCancel={() => setIsModalOpen(false)}
+              />
+            </Suspense>
+          </DialogContent>
+        </Dialog>
       </div>
     </AppLayout>
   )

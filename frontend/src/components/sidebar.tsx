@@ -48,7 +48,18 @@ const navigationItems = [
 
 export function Sidebar() {
   const pathname = usePathname()
-  const { sidebarExpanded, toggleSidebar, currentUser } = useAppStore()
+  const { sidebarExpanded, toggleSidebar, setSidebarExpanded, currentUser } = useAppStore()
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+    setSidebarExpanded(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    setSidebarExpanded(false)
+  }
 
   return (
     <div
@@ -56,9 +67,14 @@ export function Sidebar() {
         'flex flex-col h-screen bg-blue-900 text-white transition-all duration-300 ease-in-out',
         sidebarExpanded ? 'w-64' : 'w-16'
       )}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-blue-800">
+      <div className={cn(
+        'flex items-center p-4 border-b border-blue-800',
+        sidebarExpanded ? 'justify-between' : 'justify-center'
+      )}>
         <div className={cn('flex items-center space-x-3', !sidebarExpanded && 'justify-center')}>
           <div className="w-8 h-8 rounded-lg overflow-hidden bg-white flex items-center justify-center">
             <Image
@@ -73,14 +89,16 @@ export function Sidebar() {
             <h1 className="text-xl font-bold">AutoGestor</h1>
           )}
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={toggleSidebar}
-          className="text-white hover:bg-blue-800"
-        >
-          {sidebarExpanded ? <ChevronLeft className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-        </Button>
+        {sidebarExpanded && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleSidebar}
+            className="text-white hover:bg-blue-800"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </Button>
+        )}
       </div>
 
       {/* Navigation */}

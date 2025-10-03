@@ -13,7 +13,9 @@ export function Header() {
   const { currentUser } = useAppStore()
 
   useEffect(() => {
-    setGreeting(getGreetingWithName(currentUser.name))
+    // Para o header, usar "Couto (Vulgo Noivo)" em vez do nome completo
+    const displayName = currentUser.name === 'Matheus Couto' ? 'Couto (Vulgo Noivo)' : currentUser.name
+    setGreeting(getGreetingWithName(displayName))
   }, [currentUser.name])
 
   return (
