@@ -27,12 +27,12 @@ export default function FinanceiroPage() {
 
         {/* Financial Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-green-600 transition-colors duration-300">
                 Receita Mensal
               </CardTitle>
-              <TrendingUp className="h-4 w-4 text-green-600" />
+              <TrendingUp className="h-4 w-4 text-green-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-600">R$ 45.280</div>
@@ -40,12 +40,12 @@ export default function FinanceiroPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-red-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-red-600 transition-colors duration-300">
                 Despesas Mensais
               </CardTitle>
-              <TrendingDown className="h-4 w-4 text-red-600" />
+              <TrendingDown className="h-4 w-4 text-red-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-red-600">R$ 18.450</div>
@@ -53,12 +53,12 @@ export default function FinanceiroPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-blue-600 transition-colors duration-300">
                 Lucro Líquido
               </CardTitle>
-              <DollarSign className="h-4 w-4 text-blue-600" />
+              <DollarSign className="h-4 w-4 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-blue-600">R$ 26.830</div>
@@ -66,12 +66,12 @@ export default function FinanceiroPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-yellow-600 transition-colors duration-300">
                 Contas a Receber
               </CardTitle>
-              <CreditCard className="h-4 w-4 text-yellow-600" />
+              <CreditCard className="h-4 w-4 text-yellow-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-yellow-600">R$ 12.340</div>

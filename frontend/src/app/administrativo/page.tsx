@@ -21,54 +21,54 @@ export default function AdministrativoPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-blue-600 transition-colors duration-300">
                 Instrutores
               </CardTitle>
-              <Users className="h-4 w-4 text-blue-600" />
+              <Users className="h-4 w-4 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">8</div>
+              <div className="text-2xl font-bold group-hover:text-blue-600 transition-colors duration-300">8</div>
               <p className="text-xs text-gray-500">6 ativos hoje</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-green-600 transition-colors duration-300">
                 Aulas Hoje
               </CardTitle>
-              <Calendar className="h-4 w-4 text-green-600" />
+              <Calendar className="h-4 w-4 text-green-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">32</div>
+              <div className="text-2xl font-bold group-hover:text-green-600 transition-colors duration-300">32</div>
               <p className="text-xs text-gray-500">28 concluídas</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-yellow-600 transition-colors duration-300">
                 Documentos
               </CardTitle>
-              <FileText className="h-4 w-4 text-yellow-600" />
+              <FileText className="h-4 w-4 text-yellow-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">156</div>
+              <div className="text-2xl font-bold group-hover:text-yellow-600 transition-colors duration-300">156</div>
               <p className="text-xs text-gray-500">12 pendentes</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-purple-600 transition-colors duration-300">
                 Certificados
               </CardTitle>
-              <CheckCircle className="h-4 w-4 text-purple-600" />
+              <CheckCircle className="h-4 w-4 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">23</div>
+              <div className="text-2xl font-bold group-hover:text-purple-600 transition-colors duration-300">23</div>
               <p className="text-xs text-gray-500">Este mês</p>
             </CardContent>
           </Card>

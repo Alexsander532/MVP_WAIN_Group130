@@ -22,10 +22,10 @@ export default function InstrutorPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Instrutores Ativos</CardTitle>
-              <GraduationCap className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium group-hover:text-primary transition-colors duration-300">Instrutores Ativos</CardTitle>
+              <GraduationCap className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-primary">12</div>
@@ -35,39 +35,39 @@ export default function InstrutorPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Aulas Hoje</CardTitle>
-              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium group-hover:text-blue-600 transition-colors duration-300">Aulas Hoje</CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground group-hover:text-blue-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">28</div>
+              <div className="text-2xl font-bold text-primary group-hover:text-blue-600 transition-colors duration-300">28</div>
               <p className="text-xs text-muted-foreground">
                 6 aulas restantes
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Horas Trabalhadas</CardTitle>
-              <Clock className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium group-hover:text-green-600 transition-colors duration-300">Horas Trabalhadas</CardTitle>
+              <Clock className="h-4 w-4 text-muted-foreground group-hover:text-green-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">156h</div>
+              <div className="text-2xl font-bold text-primary group-hover:text-green-600 transition-colors duration-300">156h</div>
               <p className="text-xs text-muted-foreground">
                 Este mês
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Taxa de Aprovação</CardTitle>
-              <CheckCircle className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium group-hover:text-emerald-600 transition-colors duration-300">Taxa de Aprovação</CardTitle>
+              <CheckCircle className="h-4 w-4 text-muted-foreground group-hover:text-emerald-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">87%</div>
+              <div className="text-2xl font-bold text-primary group-hover:text-emerald-600 transition-colors duration-300">87%</div>
               <p className="text-xs text-muted-foreground">
                 +5% em relação ao mês anterior
               </p>

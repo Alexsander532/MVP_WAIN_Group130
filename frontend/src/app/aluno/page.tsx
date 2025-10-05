@@ -63,54 +63,54 @@ export default function AlunoPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-blue-600 transition-colors duration-300">
                 Total de Alunos
               </CardTitle>
-              <Users className="h-4 w-4 text-blue-600" />
+              <Users className="h-4 w-4 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">248</div>
+              <div className="text-2xl font-bold group-hover:text-blue-600 transition-colors duration-300">248</div>
               <p className="text-xs text-gray-500">+12 este mês</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-green-600 transition-colors duration-300">
                 Ativos
               </CardTitle>
-              <Users className="h-4 w-4 text-green-600" />
+              <Users className="h-4 w-4 text-green-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">198</div>
+              <div className="text-2xl font-bold group-hover:text-green-600 transition-colors duration-300">198</div>
               <p className="text-xs text-gray-500">80% do total</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-yellow-600 transition-colors duration-300">
                 Em Formação
               </CardTitle>
-              <Users className="h-4 w-4 text-yellow-600" />
+              <Users className="h-4 w-4 text-yellow-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">35</div>
+              <div className="text-2xl font-bold group-hover:text-yellow-600 transition-colors duration-300">35</div>
               <p className="text-xs text-gray-500">14% do total</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-purple-600 transition-colors duration-300">
                 Formados
               </CardTitle>
-              <Users className="h-4 w-4 text-purple-600" />
+              <Users className="h-4 w-4 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">15</div>
+              <div className="text-2xl font-bold group-hover:text-purple-600 transition-colors duration-300">15</div>
               <p className="text-xs text-gray-500">6% do total</p>
             </CardContent>
           </Card>

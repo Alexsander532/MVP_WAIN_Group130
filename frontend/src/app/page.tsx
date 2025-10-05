@@ -55,17 +55,17 @@ export default function Dashboard() {
           {stats.map((stat) => {
             const Icon = stat.icon
             return (
-              <Card key={stat.title}>
+              <Card key={stat.title} className="transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
+                  <CardTitle className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors duration-300">
                     {stat.title}
                   </CardTitle>
-                  <Icon className="h-4 w-4 text-primary" />
+                  <Icon className="h-4 w-4 text-primary group-hover:scale-110 transition-transform duration-300" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                  <div className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{stat.value}</div>
                   <div className="flex items-center space-x-1 text-xs">
-                    <TrendingUp className="h-3 w-3 text-green-500" />
+                    <TrendingUp className="h-3 w-3 text-green-500 group-hover:scale-110 transition-transform duration-300" />
                     <span className="text-green-500">{stat.change}</span>
                     <span className="text-muted-foreground">vs mês anterior</span>
                   </div>

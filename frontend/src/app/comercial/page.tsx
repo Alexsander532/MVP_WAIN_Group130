@@ -22,52 +22,52 @@ export default function ComercialPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Leads Ativos</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium group-hover:text-blue-600 transition-colors duration-300">Leads Ativos</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground group-hover:text-blue-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">127</div>
+              <div className="text-2xl font-bold text-primary group-hover:text-blue-600 transition-colors duration-300">127</div>
               <p className="text-xs text-muted-foreground">
                 +12% em relação ao mês anterior
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Conversões</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium group-hover:text-green-600 transition-colors duration-300">Conversões</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground group-hover:text-green-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">23</div>
+              <div className="text-2xl font-bold text-primary group-hover:text-green-600 transition-colors duration-300">23</div>
               <p className="text-xs text-muted-foreground">
                 +8% em relação ao mês anterior
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Taxa de Conversão</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium group-hover:text-purple-600 transition-colors duration-300">Taxa de Conversão</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground group-hover:text-purple-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">18.1%</div>
+              <div className="text-2xl font-bold text-primary group-hover:text-purple-600 transition-colors duration-300">18.1%</div>
               <p className="text-xs text-muted-foreground">
                 +2.3% em relação ao mês anterior
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Receita Prevista</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium group-hover:text-emerald-600 transition-colors duration-300">Receita Prevista</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground group-hover:text-emerald-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">R$ 45.230</div>
+              <div className="text-2xl font-bold text-primary group-hover:text-emerald-600 transition-colors duration-300">R$ 45.230</div>
               <p className="text-xs text-muted-foreground">
                 +15% em relação ao mês anterior
               </p>
