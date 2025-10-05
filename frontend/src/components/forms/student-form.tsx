@@ -4,53 +4,215 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Select, SelectItem } from "@/components/ui/select"
+import { useStudents } from "@/hooks/useStudents"
+import { toast } from "sonner"
+import { 
+  formatCPF, 
+  formatPhone, 
+  formatCEP, 
+  formatDate,
+  validateEmail,
+  validateCPF,
+  validatePhone,
+  validateCEP,
+  BRAZILIAN_STATES,
+  dateToInputFormat,
+  dateToDisplayFormat
+} from "@/lib/formatters"
 
 interface StudentFormProps {
   onSubmit?: (data: StudentFormData) => void
   onCancel?: () => void
+  studentId?: string // Para edição
 }
 
 export interface StudentFormData {
   name: string
+  motherName: string
   email: string
   phone: string
   cpf: string
-  rg: string
   birthDate: string
   address: string
+  number: string
+  neighborhood: string
   city: string
   state: string
   zipCode: string
-  course: string
-  enrollmentDate: string
 }
 
-export function StudentForm({ onSubmit, onCancel }: StudentFormProps) {
-  const [formData, setFormData] = useState<StudentFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    cpf: "",
-    rg: "",
-    birthDate: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    course: "",
-    enrollmentDate: "",
+export function StudentForm({ onSubmit, onCancel, studentId }: StudentFormProps) {
+  const { addStudent, updateStudent, getStudentById } = useStudents()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  
+  // Inicializar dados do formulário (para edição ou novo cadastro)
+  const [formData, setFormData] = useState<StudentFormData>(() => {
+    if (studentId) {
+      const existingStudent = getStudentById(studentId)
+      if (existingStudent) {
+        const { id, createdAt, updatedAt, ...studentData } = existingStudent
+        return studentData
+      }
+    }
+    return {
+      name: "",
+      motherName: "",
+      email: "",
+      phone: "",
+      cpf: "",
+      birthDate: "",
+      address: "",
+      number: "",
+      neighborhood: "",
+      city: "",
+      state: "",
+      zipCode: "",
+    }
   })
 
+  // Estados para controle de validação
+  const [errors, setErrors] = useState<Partial<StudentFormData>>({})
+  const [touched, setTouched] = useState<Partial<Record<keyof StudentFormData, boolean>>>({})
+
   const handleInputChange = (field: keyof StudentFormData, value: string) => {
+    let formattedValue = value
+    let error = ""
+
+    // Aplicar formatação automática baseada no campo
+    switch (field) {
+      case "cpf":
+        formattedValue = formatCPF(value)
+        if (touched[field] && formattedValue && !validateCPF(formattedValue)) {
+          error = "CPF inválido"
+        }
+        break
+      case "phone":
+        formattedValue = formatPhone(value)
+        if (touched[field] && formattedValue && !validatePhone(formattedValue)) {
+          error = "Telefone inválido"
+        }
+        break
+      case "zipCode":
+        formattedValue = formatCEP(value)
+        if (touched[field] && formattedValue && !validateCEP(formattedValue)) {
+          error = "CEP inválido"
+        }
+        break
+      case "birthDate":
+        formattedValue = formatDate(value)
+        break
+      case "email":
+        if (touched[field] && value && !validateEmail(value)) {
+          error = "Email inválido"
+        }
+        break
+    }
+
     setFormData(prev => ({
       ...prev,
-      [field]: value
+      [field]: formattedValue
+    }))
+
+    // Atualizar erros
+    setErrors(prev => ({
+      ...prev,
+      [field]: error
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleBlur = (field: keyof StudentFormData) => {
+    setTouched(prev => ({
+      ...prev,
+      [field]: true
+    }))
+
+    // Revalidar o campo quando perder o foco
+    const value = formData[field]
+    handleInputChange(field, value)
+  }
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<StudentFormData> = {}
+    
+    // Validações obrigatórias
+    if (!formData.name.trim()) newErrors.name = "Nome é obrigatório"
+    if (!formData.email.trim()) newErrors.email = "Email é obrigatório"
+    else if (!validateEmail(formData.email)) newErrors.email = "Email inválido"
+    
+    if (!formData.cpf.trim()) newErrors.cpf = "CPF é obrigatório"
+    else if (!validateCPF(formData.cpf)) newErrors.cpf = "CPF inválido"
+    
+    if (!formData.phone.trim()) newErrors.phone = "Telefone é obrigatório"
+    else if (!validatePhone(formData.phone)) newErrors.phone = "Telefone inválido"
+    
+    if (formData.zipCode && !validateCEP(formData.zipCode)) {
+      newErrors.zipCode = "CEP inválido"
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    onSubmit?.(formData)
+    setIsSubmitting(true)
+    
+    // Marcar todos os campos como tocados para mostrar erros
+    const allFields = Object.keys(formData) as (keyof StudentFormData)[]
+    setTouched(allFields.reduce((acc, field) => ({ ...acc, [field]: true }), {}))
+    
+    if (!validateForm()) {
+      toast.error("Por favor, corrija os erros no formulário")
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      let result
+      if (studentId) {
+        // Atualizar aluno existente
+        result = updateStudent(studentId, formData)
+        if (result) {
+          toast.success("Aluno atualizado com sucesso!")
+        } else {
+          toast.error("Erro ao atualizar aluno")
+          return
+        }
+      } else {
+        // Adicionar novo aluno
+        result = addStudent(formData)
+        toast.success("Aluno cadastrado com sucesso!")
+        
+        // Limpar formulário após cadastro
+        setFormData({
+          name: "",
+          motherName: "",
+          email: "",
+          phone: "",
+          cpf: "",
+          birthDate: "",
+          address: "",
+          number: "",
+          neighborhood: "",
+          city: "",
+          state: "",
+          zipCode: "",
+        })
+        setErrors({})
+        setTouched({})
+      }
+
+      // Chamar callback personalizado se fornecido
+      onSubmit?.(formData)
+      
+    } catch (error) {
+      console.error("Erro ao salvar aluno:", error)
+      toast.error("Erro ao salvar dados do aluno")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -64,9 +226,26 @@ export function StudentForm({ onSubmit, onCancel }: StudentFormProps) {
             type="text"
             value={formData.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
-            required
+            onBlur={() => handleBlur("name")}
+            className={errors.name ? "border-red-500" : ""}
             placeholder="Digite o nome completo"
           />
+          {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
+        </div>
+
+        {/* Nome da Mãe */}
+        <div className="md:col-span-2">
+          <Label htmlFor="motherName">Nome da Mãe</Label>
+          <Input
+            id="motherName"
+            type="text"
+            value={formData.motherName}
+            onChange={(e) => handleInputChange("motherName", e.target.value)}
+            onBlur={() => handleBlur("motherName")}
+            className={errors.motherName ? "border-red-500" : ""}
+            placeholder="Digite o nome completo da mãe"
+          />
+          {errors.motherName && <p className="text-sm text-red-500 mt-1">{errors.motherName}</p>}
         </div>
 
         {/* Email */}
@@ -77,22 +256,26 @@ export function StudentForm({ onSubmit, onCancel }: StudentFormProps) {
             type="email"
             value={formData.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
-            required
+            onBlur={() => handleBlur("email")}
+            className={errors.email ? "border-red-500" : ""}
             placeholder="email@exemplo.com"
           />
+          {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email}</p>}
         </div>
 
-        {/* Telefone */}
+        {/* Celular */}
         <div>
-          <Label htmlFor="phone">Telefone *</Label>
+          <Label htmlFor="phone">Celular *</Label>
           <Input
             id="phone"
             type="tel"
             value={formData.phone}
             onChange={(e) => handleInputChange("phone", e.target.value)}
-            required
+            onBlur={() => handleBlur("phone")}
+            className={errors.phone ? "border-red-500" : ""}
             placeholder="(11) 99999-9999"
           />
+          {errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone}</p>}
         </div>
 
         {/* CPF */}
@@ -103,49 +286,49 @@ export function StudentForm({ onSubmit, onCancel }: StudentFormProps) {
             type="text"
             value={formData.cpf}
             onChange={(e) => handleInputChange("cpf", e.target.value)}
-            required
+            onBlur={() => handleBlur("cpf")}
+            className={errors.cpf ? "border-red-500" : ""}
             placeholder="000.000.000-00"
           />
+          {errors.cpf && <p className="text-sm text-red-500 mt-1">{errors.cpf}</p>}
         </div>
 
-        {/* RG */}
-        <div>
-          <Label htmlFor="rg">RG</Label>
-          <Input
-            id="rg"
-            type="text"
-            value={formData.rg}
-            onChange={(e) => handleInputChange("rg", e.target.value)}
-            placeholder="00.000.000-0"
-          />
-        </div>
+
 
         {/* Data de Nascimento */}
         <div>
-          <Label htmlFor="birthDate">Data de Nascimento *</Label>
+          <Label htmlFor="birthDate">Data de Nascimento</Label>
           <Input
             id="birthDate"
-            type="date"
+            type="text"
             value={formData.birthDate}
             onChange={(e) => handleInputChange("birthDate", e.target.value)}
-            required
+            onBlur={() => handleBlur("birthDate")}
+            className={errors.birthDate ? "border-red-500" : ""}
+            placeholder="dd/mm/aaaa"
+            maxLength={10}
           />
+          {errors.birthDate && <p className="text-sm text-red-500 mt-1">{errors.birthDate}</p>}
         </div>
 
-        {/* Data de Matrícula */}
+        {/* CEP */}
         <div>
-          <Label htmlFor="enrollmentDate">Data de Matrícula *</Label>
+          <Label htmlFor="zipCode">CEP</Label>
           <Input
-            id="enrollmentDate"
-            type="date"
-            value={formData.enrollmentDate}
-            onChange={(e) => handleInputChange("enrollmentDate", e.target.value)}
-            required
+            id="zipCode"
+            type="text"
+            value={formData.zipCode}
+            onChange={(e) => handleInputChange("zipCode", e.target.value)}
+            onBlur={() => handleBlur("zipCode")}
+            className={errors.zipCode ? "border-red-500" : ""}
+            placeholder="00000-000"
+            maxLength={9}
           />
+          {errors.zipCode && <p className="text-sm text-red-500 mt-1">{errors.zipCode}</p>}
         </div>
 
         {/* Endereço */}
-        <div className="md:col-span-2">
+        <div>
           <Label htmlFor="address">Endereço *</Label>
           <Input
             id="address"
@@ -153,61 +336,65 @@ export function StudentForm({ onSubmit, onCancel }: StudentFormProps) {
             value={formData.address}
             onChange={(e) => handleInputChange("address", e.target.value)}
             required
-            placeholder="Rua, número, complemento"
+            placeholder="Nome da rua"
+          />
+        </div>
+
+        {/* Número */}
+        <div>
+          <Label htmlFor="number">Número *</Label>
+          <Input
+            id="number"
+            type="text"
+            value={formData.number}
+            onChange={(e) => handleInputChange("number", e.target.value)}
+            required
+            placeholder="123"
+          />
+        </div>
+
+        {/* Bairro */}
+        <div>
+          <Label htmlFor="neighborhood">Bairro *</Label>
+          <Input
+            id="neighborhood"
+            type="text"
+            value={formData.neighborhood}
+            onChange={(e) => handleInputChange("neighborhood", e.target.value)}
+            required
+            placeholder="Nome do bairro"
           />
         </div>
 
         {/* Cidade */}
         <div>
-          <Label htmlFor="city">Cidade *</Label>
+          <Label htmlFor="city">Cidade</Label>
           <Input
             id="city"
             type="text"
             value={formData.city}
             onChange={(e) => handleInputChange("city", e.target.value)}
-            required
             placeholder="Nome da cidade"
           />
         </div>
 
         {/* Estado */}
         <div>
-          <Label htmlFor="state">Estado *</Label>
-          <Input
-            id="state"
-            type="text"
+          <Label htmlFor="state">Estado</Label>
+          <Select
             value={formData.state}
             onChange={(e) => handleInputChange("state", e.target.value)}
-            required
-            placeholder="SP"
-            maxLength={2}
-          />
-        </div>
-
-        {/* CEP */}
-        <div>
-          <Label htmlFor="zipCode">CEP *</Label>
-          <Input
-            id="zipCode"
-            type="text"
-            value={formData.zipCode}
-            onChange={(e) => handleInputChange("zipCode", e.target.value)}
-            required
-            placeholder="00000-000"
-          />
-        </div>
-
-        {/* Curso */}
-        <div>
-          <Label htmlFor="course">Curso *</Label>
-          <Input
-            id="course"
-            type="text"
-            value={formData.course}
-            onChange={(e) => handleInputChange("course", e.target.value)}
-            required
-            placeholder="Nome do curso"
-          />
+            onBlur={() => handleBlur("state")}
+            className={errors.state ? "border-red-500" : ""}
+          >
+            <option value="">Selecione um estado</option>
+            {BRAZILIAN_STATES.map((state) => (
+              <SelectItem key={state.value} value={state.value}>
+                {state.label}
+              </SelectItem>
+            ))}
+          </Select>
+          {errors.state && <p className="text-sm text-red-500 mt-1">{errors.state}</p>}
         </div>
       </div>
 
@@ -217,11 +404,18 @@ export function StudentForm({ onSubmit, onCancel }: StudentFormProps) {
           type="button"
           variant="outline"
           onClick={onCancel}
+          disabled={isSubmitting}
         >
           Cancelar
         </Button>
-        <Button type="submit">
-          Cadastrar Aluno
+        <Button 
+          type="submit" 
+          disabled={isSubmitting}
+        >
+          {isSubmitting 
+            ? (studentId ? "Atualizando..." : "Cadastrando...") 
+            : (studentId ? "Atualizar Aluno" : "Cadastrar Aluno")
+          }
         </Button>
       </div>
     </form>

@@ -52,18 +52,29 @@ export default function Dashboard() {
       <div className="space-y-6">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat) => {
+          {stats.map((stat, index) => {
             const Icon = stat.icon
+            
+            // Definindo cores específicas para cada card
+             const cardColors = [
+               { shadow: 'hover:shadow-blue-500/10', text: 'group-hover:text-blue-600', icon: 'group-hover:text-blue-600' }, // Alunos Ativos
+               { shadow: 'hover:shadow-purple-500/10', text: 'group-hover:text-purple-600', icon: 'group-hover:text-purple-600' }, // Veículos Ativos
+               { shadow: 'hover:shadow-yellow-500/10', text: 'group-hover:text-yellow-600', icon: 'group-hover:text-yellow-600' }, // Aulas Hoje
+               { shadow: 'hover:shadow-green-500/10', text: 'group-hover:text-green-600', icon: 'group-hover:text-green-600' }, // Receita Mensal
+             ]
+            
+            const colors = cardColors[index] || cardColors[0]
+            
             return (
-              <Card key={stat.title} className="transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
+              <Card key={stat.title} className={`transition-all duration-300 hover:shadow-lg ${colors.shadow} hover:-translate-y-1 hover:scale-105 cursor-pointer group`}>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors duration-300">
+                  <CardTitle className={`text-sm font-medium text-muted-foreground ${colors.text} transition-colors duration-300`}>
                     {stat.title}
                   </CardTitle>
-                  <Icon className="h-4 w-4 text-primary group-hover:scale-110 transition-transform duration-300" />
+                  <Icon className={`h-4 w-4 text-muted-foreground ${colors.icon} group-hover:scale-110 transition-all duration-300`} />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{stat.value}</div>
+                  <div className={`text-2xl font-bold text-foreground ${colors.text} transition-colors duration-300`}>{stat.value}</div>
                   <div className="flex items-center space-x-1 text-xs">
                     <TrendingUp className="h-3 w-3 text-green-500 group-hover:scale-110 transition-transform duration-300" />
                     <span className="text-green-500">{stat.change}</span>

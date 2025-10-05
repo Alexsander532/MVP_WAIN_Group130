@@ -10,6 +10,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Loading } from '@/components/ui/loading'
 import { Users, Plus, Search, Filter, FileText, Printer, ClipboardList, Activity } from 'lucide-react'
 import { StudentFormData } from '@/components/forms/student-form'
+import { StudentsTable } from '@/components/tables/students-table'
+import { useStudents } from '@/hooks/useStudents'
+import { toast } from 'sonner'
 
 // Lazy loading do StudentForm para melhor performance
 const StudentForm = lazy(() => import('@/components/forms/student-form').then(module => ({ default: module.StudentForm })))
@@ -20,22 +23,34 @@ const StudentForm = lazy(() => import('@/components/forms/student-form').then(mo
 export default function AlunoPage() {
   const [activeTab, setActiveTab] = useState("cadastro")
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const { addStudent } = useStudents()
 
   const handleNewStudent = () => {
     setIsModalOpen(true)
   }
 
   const handleStudentSubmit = (data: StudentFormData) => {
-    console.log('Dados do aluno:', data)
-    // Aqui você implementaria a lógica para salvar o aluno
-    setIsModalOpen(false)
-    // Mostrar mensagem de sucesso
+    try {
+      addStudent(data)
+      toast.success("Aluno cadastrado com sucesso!")
+      setIsModalOpen(false)
+    } catch (error) {
+      console.error('Erro ao cadastrar aluno:', error)
+      toast.error("Erro ao cadastrar aluno. Tente novamente.")
+    }
   }
 
   const handleStudentSubmitInline = (data: StudentFormData) => {
-    console.log('Dados do aluno (inline):', data)
-    // Aqui você implementaria a lógica para salvar o aluno
-    // Mostrar mensagem de sucesso
+    try {
+      addStudent(data)
+      toast.success("Aluno cadastrado com sucesso!")
+      // Mudar para a aba de histórico para ver o aluno cadastrado
+      setActiveTab("historico")
+    } catch (error) {
+      console.error('Erro ao cadastrar aluno:', error)
+      toast.error("Erro ao cadastrar aluno. Tente novamente.")
+    }
   }
 
   const handleTabChange = (value: string) => {
@@ -61,60 +76,7 @@ export default function AlunoPage() {
           </Button>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-blue-600 transition-colors duration-300">
-                Total de Alunos
-              </CardTitle>
-              <Users className="h-4 w-4 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold group-hover:text-blue-600 transition-colors duration-300">248</div>
-              <p className="text-xs text-gray-500">+12 este mês</p>
-            </CardContent>
-          </Card>
 
-          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-green-600 transition-colors duration-300">
-                Ativos
-              </CardTitle>
-              <Users className="h-4 w-4 text-green-600 group-hover:scale-110 transition-transform duration-300" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold group-hover:text-green-600 transition-colors duration-300">198</div>
-              <p className="text-xs text-gray-500">80% do total</p>
-            </CardContent>
-          </Card>
-
-          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-yellow-600 transition-colors duration-300">
-                Em Formação
-              </CardTitle>
-              <Users className="h-4 w-4 text-yellow-600 group-hover:scale-110 transition-transform duration-300" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold group-hover:text-yellow-600 transition-colors duration-300">35</div>
-              <p className="text-xs text-gray-500">14% do total</p>
-            </CardContent>
-          </Card>
-
-          <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600 group-hover:text-purple-600 transition-colors duration-300">
-                Formados
-              </CardTitle>
-              <Users className="h-4 w-4 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold group-hover:text-purple-600 transition-colors duration-300">15</div>
-              <p className="text-xs text-gray-500">6% do total</p>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* Sub-abas */}
         <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
@@ -239,6 +201,8 @@ export default function AlunoPage() {
                     type="text"
                     placeholder="Buscar por nome, CPF ou telefone..."
                     className="pl-10"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
               </div>
@@ -249,6 +213,9 @@ export default function AlunoPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Tabela de Alunos Cadastrados */}
+        <StudentsTable searchQuery={searchQuery} />
 
         {/* Modal de Cadastro */}
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
