@@ -10,14 +10,12 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
   Users,
-  Car,
   Settings,
-  DollarSign,
+  GitBranch,
   ChevronLeft,
   Home,
-  GraduationCap,
-  FileText,
-  Briefcase
+  CreditCard,
+  Bot
 } from 'lucide-react'
 
 const navigationItems = [
@@ -27,37 +25,22 @@ const navigationItems = [
     icon: Home,
   },
   {
-    title: 'Alunos',
+    title: 'Chat',
     href: '/aluno',
-    icon: Users,
+    icon: Bot,
   },
   {
-    title: 'Comercial',
-    href: '/comercial',
-    icon: Briefcase,
+    title: 'Workflow',
+    href: '/aluno/workflow',
+    icon: GitBranch,
   },
   {
-    title: 'Frota',
-    href: '/frota',
-    icon: Car,
+    title: 'Billing',
+    href: '/billing',
+    icon: CreditCard,
   },
   {
-    title: 'Instrutor',
-    href: '/instrutor',
-    icon: GraduationCap,
-  },
-  {
-    title: 'Financeiro',
-    href: '/financeiro',
-    icon: DollarSign,
-  },
-  {
-    title: 'Relatórios',
-    href: '/relatorios',
-    icon: FileText,
-  },
-  {
-    title: 'Administrativo',
+    title: 'Settings',
     href: '/administrativo',
     icon: Settings,
   },
@@ -93,14 +76,14 @@ export function Sidebar() {
           <div className="w-10 h-10 rounded-xl overflow-hidden bg-white flex items-center justify-center shadow-sm">
             <Image
               src="/logo.png"
-              alt="AutoGestor Logo"
+              alt="WAIN Logo"
               width={28}
               height={28}
               className="object-contain"
             />
           </div>
           {sidebarExpanded && (
-            <h1 className="text-xl font-bold text-sidebar-foreground">AutoGestor</h1>
+            <h1 className="text-xl font-bold text-sidebar-foreground">WAIN</h1>
           )}
         </div>
         {sidebarExpanded && (

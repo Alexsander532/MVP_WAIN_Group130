@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AutoGestor - Sistema de Gestão de Autoescolas",
+  title: "WAIN - Weather Artificial Intelligence of NASA",
   description: "Sistema completo para gestão de autoescolas com controle de alunos, frota, administrativo e financeiro",
   icons: {
     icon: '/faviconlogo.ico',

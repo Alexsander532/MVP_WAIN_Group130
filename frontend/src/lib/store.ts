@@ -13,8 +13,8 @@ interface AppState {
 export const useAppStore = create<AppState>((set) => ({
   sidebarExpanded: false,
   currentUser: {
-    name: 'Matheus Couto',
-    email: 'matheus.couto@autoescola.com'
+    name: 'User',
+    email: 'user@autoescola.com'
   },
   toggleSidebar: () => set((state) => ({ sidebarExpanded: !state.sidebarExpanded })),
   setSidebarExpanded: (expanded: boolean) => set({ sidebarExpanded: expanded }),

@@ -11,12 +11,12 @@ export default function InstrutorPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Instrutor</h1>
-            <p className="text-muted-foreground">Gestão de instrutores, aulas e horários</p>
+            <h1 className="text-3xl font-bold text-foreground">Instructor</h1>
+            <p className="text-muted-foreground">Management of instructors, classes and schedules</p>
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700">
             <Plus className="w-4 h-4 mr-2" />
-            Novo Instrutor
+            New Instructor
           </Button>
         </div>
 
@@ -24,52 +24,52 @@ export default function InstrutorPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium group-hover:text-primary transition-colors duration-300">Instrutores Ativos</CardTitle>
+              <CardTitle className="text-sm font-medium group-hover:text-primary transition-colors duration-300">Active Instructors</CardTitle>
               <GraduationCap className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-primary">12</div>
               <p className="text-xs text-muted-foreground">
-                +2 novos este mês
+                +2 new this month
               </p>
             </CardContent>
           </Card>
 
           <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium group-hover:text-blue-600 transition-colors duration-300">Aulas Hoje</CardTitle>
+              <CardTitle className="text-sm font-medium group-hover:text-blue-600 transition-colors duration-300">Classes Today</CardTitle>
               <Calendar className="h-4 w-4 text-muted-foreground group-hover:text-blue-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-primary group-hover:text-blue-600 transition-colors duration-300">28</div>
               <p className="text-xs text-muted-foreground">
-                6 aulas restantes
+                6 classes remaining
               </p>
             </CardContent>
           </Card>
 
           <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-green-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium group-hover:text-green-600 transition-colors duration-300">Horas Trabalhadas</CardTitle>
+              <CardTitle className="text-sm font-medium group-hover:text-green-600 transition-colors duration-300">Hours Worked</CardTitle>
               <Clock className="h-4 w-4 text-muted-foreground group-hover:text-green-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-primary group-hover:text-green-600 transition-colors duration-300">156h</div>
               <p className="text-xs text-muted-foreground">
-                Este mês
+                This month
               </p>
             </CardContent>
           </Card>
 
           <Card className="transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/10 hover:-translate-y-1 hover:scale-105 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium group-hover:text-emerald-600 transition-colors duration-300">Taxa de Aprovação</CardTitle>
+              <CardTitle className="text-sm font-medium group-hover:text-emerald-600 transition-colors duration-300">Approval Rate</CardTitle>
               <CheckCircle className="h-4 w-4 text-muted-foreground group-hover:text-emerald-600 group-hover:scale-110 transition-all duration-300" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-primary group-hover:text-emerald-600 transition-colors duration-300">87%</div>
               <p className="text-xs text-muted-foreground">
-                +5% em relação ao mês anterior
+                +5% compared to previous month
               </p>
             </CardContent>
           </Card>
@@ -78,7 +78,7 @@ export default function InstrutorPage() {
         {/* Filters and Search */}
         <Card>
           <CardHeader>
-            <CardTitle>Filtros e Busca</CardTitle>
+            <CardTitle>Filters and Search</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col md:flex-row gap-4">
@@ -87,14 +87,14 @@ export default function InstrutorPage() {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
                   <Input
                     type="text"
-                    placeholder="Buscar por nome, CPF ou especialidade..."
+                    placeholder="Search by name, ID or specialty..."
                     className="pl-10"
                   />
                 </div>
               </div>
               <Button variant="outline">
                 <Filter className="w-4 h-4 mr-2" />
-                Filtros
+                Filters
               </Button>
             </div>
           </CardContent>
@@ -102,50 +102,50 @@ export default function InstrutorPage() {
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Agenda do Dia */}
+          {/* Daily Schedule */}
           <Card>
             <CardHeader>
-              <CardTitle>Agenda do Dia</CardTitle>
+              <CardTitle>Daily Schedule</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
                   <div>
                     <h4 className="font-medium text-foreground">08:00 - 09:00</h4>
-                    <p className="text-sm text-muted-foreground">João Silva - Aula Prática</p>
+                    <p className="text-sm text-muted-foreground">João Silva - Practical Class</p>
                   </div>
                   <div className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded">
-                    Em andamento
+                    In progress
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
                   <div>
                     <h4 className="font-medium text-foreground">09:00 - 10:00</h4>
-                    <p className="text-sm text-muted-foreground">Maria Santos - Aula Teórica</p>
+                    <p className="text-sm text-muted-foreground">Maria Santos - Theory Class</p>
                   </div>
                   <div className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
-                    Próxima
+                    Next
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
                   <div>
                     <h4 className="font-medium text-foreground">10:00 - 11:00</h4>
-                    <p className="text-sm text-muted-foreground">Carlos Oliveira - Simulado</p>
+                    <p className="text-sm text-muted-foreground">Carlos Oliveira - Mock Test</p>
                   </div>
                   <div className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
-                    Agendado
+                    Scheduled
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between p-3 bg-accent rounded-lg">
                   <div>
                     <h4 className="font-medium text-foreground">11:00 - 12:00</h4>
-                    <p className="text-sm text-muted-foreground">Ana Costa - Aula Prática</p>
+                    <p className="text-sm text-muted-foreground">Ana Costa - Practical Class</p>
                   </div>
                   <div className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded">
-                    Agendado
+                    Scheduled
                   </div>
                 </div>
               </div>

@@ -13,9 +13,7 @@ export function Header() {
   const { currentUser } = useAppStore()
 
   useEffect(() => {
-    // Para o header, usar "Couto (Vulgo Noivo)" em vez do nome completo
-    const displayName = currentUser.name === 'Matheus Couto' ? 'Couto (Vulgo Noivo)' : currentUser.name
-    setGreeting(getGreetingWithName(displayName))
+    setGreeting(getGreetingWithName(currentUser.name))
   }, [currentUser.name])
 
   return (
@@ -25,7 +23,7 @@ export function Header() {
         <div>
           <h1 className="text-2xl font-bold text-foreground">{greeting}</h1>
           <p className="text-sm text-muted-foreground">
-            Bem-vindo ao painel de controle da AutoEscola
+            Welcome to WAIN
           </p>
         </div>
 

@@ -2,11 +2,11 @@ export function getGreeting(): string {
   const hour = new Date().getHours()
   
   if (hour >= 5 && hour < 12) {
-    return 'Bom dia'
+    return 'Good Morning'
   } else if (hour >= 12 && hour < 18) {
-    return 'Boa tarde'
+    return 'Good Afternoon'
   } else {
-    return 'Boa noite'
+    return 'Good Evening'
   }
 }
 
