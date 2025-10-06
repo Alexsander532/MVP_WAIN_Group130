@@ -1,8 +1,8 @@
 'use client'
 
-import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Gauge, Leaf, AlertTriangle, Wind } from 'lucide-react'
+import { Gauge, Wind } from 'lucide-react'
 
 // Simulando dados atmosféricos da NASA para as últimas 24 horas
 const generateAtmosphericData = () => {

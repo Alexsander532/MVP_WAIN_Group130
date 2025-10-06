@@ -11,8 +11,6 @@ const nextConfig: NextConfig = {
   },
   // Compressão gzip
   compress: true,
-  // Otimização de CSS
-  optimizeFonts: true,
 };
 
 export default nextConfig;

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+
 import { cn } from '@/lib/utils'
 
 export type MapType = 'fire-outbreak' | 'air-pollution' | 'flood' | 'ocean-current' | 'air-current'

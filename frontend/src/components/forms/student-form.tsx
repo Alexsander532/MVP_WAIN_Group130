@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
 import { Select, SelectItem } from "@/components/ui/select"
 import { useStudents } from "@/hooks/useStudents"
 import { toast } from "sonner"
@@ -17,9 +17,7 @@ import {
   validateCPF,
   validatePhone,
   validateCEP,
-  BRAZILIAN_STATES,
-  dateToInputFormat,
-  dateToDisplayFormat
+  BRAZILIAN_STATES
 } from "@/lib/formatters"
 
 interface StudentFormProps {

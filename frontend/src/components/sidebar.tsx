@@ -9,7 +9,7 @@ import { useAppStore } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
-  Users,
+
   Settings,
   GitBranch,
   ChevronLeft,
