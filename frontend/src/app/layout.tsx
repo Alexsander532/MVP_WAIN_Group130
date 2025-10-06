@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "WAIN - Weather Artificial Intelligence of NASA",
-  description: "Sistema completo para gestão de autoescolas com controle de alunos, frota, administrativo e financeiro",
+  description: "Advanced NASA-powered intelligent weather prediction system providing real-time atmospheric analysis and meteorological forecasting for enhanced decision-making",
   icons: {
     icon: '/faviconlogo.ico',
     shortcut: '/faviconlogo.ico',
